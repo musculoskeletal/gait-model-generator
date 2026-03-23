@@ -1,0 +1,9 @@
+scipy
+numpy==1.26.4
+pandas
+PySide6
+pyvistaqt
+c3d==0.5.2
+trc-data-reader
+opensim-model-creator>=0.3.1
+ll-visualiser>=0.3.0

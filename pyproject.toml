@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[options]
+package_dir = {'' = 'src'}
+
+[project]
+name = "model-generator"
+description = "Personalised OpenSim model generator."
+authors = [{name = "Timothy Salemink", email = "tim.nicolas@outlook.com" }]
+readme = "README.md"
+license = "Apache-2.0"
+license-files = ["LICENSE"]
+dynamic = ["version", "dependencies"]
+
+[tool.setuptools]
+include-package-data = true
+
+[tool.setuptools.package-data]
+model_generator = ["settings/marker_maps/**/*"]
+
+[tool.setuptools.dynamic]
+version = {attr = "model_generator.__version__"}
+dependencies = {file = ["requirements.txt"]}
+
+[project.urls]
+Repository = "https://github.com/tsalemink/Model-Generator"
+
+[project.gui-scripts]
+model_generator = "model_generator.application:main"
