@@ -1,6 +1,6 @@
-# Model-Fitter
+# Model-Generator
 
-The Model-Fitter is a Python desktop application for gait analysis.
+The Model-Generator is a Python desktop application for gait analysis.
 
 Given a static C3D motion capture trial, this application generates a personalised OpenSim model
 for you to use in the OpenSim toolkit.
@@ -23,5 +23,5 @@ PROCESSING section, otherwise you will be prompted for this information.
 
 If you would like to suggest a new feature for this application or report a bug you have discovered, please create a
 "New Issue" using the appropriate template found in this repository's 
-[_Issues_](https://github.com/tsalemink/Model-Fitter/issues) page. Please check that your request does not match any 
+[_Issues_](https://github.com/tsalemink/Model-Generator/issues) page. Please check that your request does not match any 
 existing issues.
