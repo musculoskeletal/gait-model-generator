@@ -5,5 +5,5 @@ PySide6
 pyvistaqt
 c3d==0.5.2
 trc-data-reader
-opensim-model-creator>=0.3.1
+opensim-model-creator==0.7.2
 ll-visualiser>=0.3.0
