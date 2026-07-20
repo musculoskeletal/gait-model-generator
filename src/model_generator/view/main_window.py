@@ -897,39 +897,17 @@ class MainWindow(QMainWindow):
 
     def _get_options(self):
         options = {
-            'line_width': self._line_width,
             'input_data_directory': self._input_data_directory,
             'output_data_directory': self._output_data_directory,
-            'optimise_knee_axis': self._optimise_knee_axis,
-            'colour_left': self._colour_left,
-            'colour_right': self._colour_right,
-            'colour_selection': self._colour_selection,
-            'filter_trc': self._filter_trc,
-            'filter_grf': self._filter_grf,
-            'use_custom_ik_task_set': self._use_custom_ik_task_set,
-            'ik_task_set_path': self._ik_task_set_path,
             'approximate_anthropometrics': self._approximate_anthropometrics,
-            'running_gait': self._running_gait,
-            'output_grf': self._output_grf,
         }
 
         return options
 
     def _set_options(self, options):
-        self._line_width = options['line_width']
         self._input_data_directory = options['input_data_directory']
         self._output_data_directory = options['output_data_directory']
-        self._optimise_knee_axis = options['optimise_knee_axis']
-        self._colour_left = options['colour_left']
-        self._colour_right = options['colour_right']
-        self._colour_selection = options['colour_selection']
-        self._filter_trc = options['filter_trc']
-        self._filter_grf = options['filter_grf']
-        self._use_custom_ik_task_set = options['use_custom_ik_task_set']
-        self._ik_task_set_path = options['ik_task_set_path']
         self._approximate_anthropometrics = options['approximate_anthropometrics']
-        self._running_gait = options['running_gait']
-        self._output_grf = options['output_grf']
 
     def _show_custom_marker_set_dialog(self):
         static_trials = []
@@ -987,20 +965,9 @@ class MainWindow(QMainWindow):
         settings.endGroup()
 
         settings.beginGroup('Options')
-        settings.setValue('line_width', self._line_width)
         settings.setValue('input_data_directory', self._input_data_directory)
         settings.setValue('output_data_directory', self._output_data_directory)
-        settings.setValue('optimise_knee_axis', self._optimise_knee_axis)
-        settings.setValue('colour_left', self._colour_left)
-        settings.setValue('colour_right', self._colour_right)
-        settings.setValue('colour_selection', self._colour_selection)
-        settings.setValue('filter_trc', self._filter_trc)
-        settings.setValue('filter_grf', self._filter_grf)
-        settings.setValue('use_custom_ik_task_set', self._use_custom_ik_task_set)
-        settings.setValue('ik_task_set_path', self._ik_task_set_path)
         settings.setValue('approximate_anthropometrics', self._approximate_anthropometrics)
-        settings.setValue('running_gait', self._running_gait)
-        settings.setValue('output_grf', self._output_grf)
         settings.endGroup()
 
     def _load_settings(self):
@@ -1027,34 +994,12 @@ class MainWindow(QMainWindow):
         settings.endGroup()
 
         settings.beginGroup('Options')
-        if settings.contains('line_width'):
-            self._line_width = float(settings.value('line_width'))
         if settings.contains('input_data_directory'):
             self._input_data_directory = settings.value('input_data_directory')
         if settings.contains('output_data_directory'):
             self._output_data_directory = settings.value('output_data_directory')
-        if settings.contains('optimise_knee_axis'):
-            self._optimise_knee_axis = settings.value('optimise_knee_axis') == 'true'
-        if settings.contains('colour_left'):
-            self._colour_left = settings.value('colour_left')
-        if settings.contains('colour_right'):
-            self._colour_right = settings.value('colour_right')
-        if settings.contains('colour_selection'):
-            self._colour_selection = settings.value('colour_selection')
-        if settings.contains('filter_trc'):
-            self._filter_trc = settings.value('filter_trc') == 'true'
-        if settings.contains('filter_grf'):
-            self._filter_grf = settings.value('filter_grf') == 'true'
-        if settings.contains('use_custom_ik_task_set'):
-            self._use_custom_ik_task_set = settings.value('use_custom_ik_task_set') == 'true'
-        if settings.contains('ik_task_set_path'):
-            self._ik_task_set_path = settings.value('ik_task_set_path')
         if settings.contains('approximate_anthropometrics'):
             self._approximate_anthropometrics = settings.value('approximate_anthropometrics') == 'true'
-        if settings.contains('running_gait'):
-            self._running_gait = settings.value('running_gait') == 'true'
-        if settings.contains('output_grf'):
-            self._output_grf = settings.value('output_grf') == 'true'
         settings.endGroup()
 
     def _quit_application(self):
