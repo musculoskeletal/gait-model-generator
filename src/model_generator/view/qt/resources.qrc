@@ -1,0 +1,5 @@
+<RCC>
+  <qresource prefix="c3d_parser">
+    <file>images/app-icon.png</file>
+  </qresource>
+</RCC>
