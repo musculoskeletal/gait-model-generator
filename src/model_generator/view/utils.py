@@ -5,8 +5,8 @@ import traceback
 from functools import wraps
 from PySide6.QtWidgets import QMessageBox
 
-from c3d_parser.core.c3d_parser import ParserError, CancelException
-from c3d_parser.settings.general import APPLICATION_NAME
+from c3d_parser.core.c3d_parser import ParserError
+from model_generator.settings.general import APPLICATION_NAME
 
 
 logger = logging.getLogger(APPLICATION_NAME)
