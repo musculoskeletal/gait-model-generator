@@ -15,16 +15,16 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QCheckBox, QDialog, QDoubleSpinBox,
-    QFormLayout, QGridLayout, QGroupBox, QHBoxLayout,
-    QLabel, QLineEdit, QPushButton, QSizePolicy,
-    QSpacerItem, QVBoxLayout, QWidget)
+from PySide6.QtWidgets import (QApplication, QCheckBox, QDialog, QFormLayout,
+    QGroupBox, QHBoxLayout, QLabel, QLineEdit,
+    QPushButton, QSizePolicy, QSpacerItem, QVBoxLayout,
+    QWidget)
 
 class Ui_OptionsDialog(object):
     def setupUi(self, OptionsDialog):
         if not OptionsDialog.objectName():
             OptionsDialog.setObjectName(u"OptionsDialog")
-        OptionsDialog.resize(450, 686)
+        OptionsDialog.resize(450, 206)
         self.verticalLayout = QVBoxLayout(OptionsDialog)
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.groupBox_3 = QGroupBox(OptionsDialog)
@@ -83,170 +83,6 @@ class Ui_OptionsDialog(object):
 
         self.verticalLayout.addWidget(self.groupBox_3)
 
-        self.groupBox = QGroupBox(OptionsDialog)
-        self.groupBox.setObjectName(u"groupBox")
-        self.formLayout = QFormLayout(self.groupBox)
-        self.formLayout.setObjectName(u"formLayout")
-        self.labelLineWidth = QLabel(self.groupBox)
-        self.labelLineWidth.setObjectName(u"labelLineWidth")
-
-        self.formLayout.setWidget(0, QFormLayout.ItemRole.LabelRole, self.labelLineWidth)
-
-        self.doubleSpinBoxLineWidth = QDoubleSpinBox(self.groupBox)
-        self.doubleSpinBoxLineWidth.setObjectName(u"doubleSpinBoxLineWidth")
-        self.doubleSpinBoxLineWidth.setValue(1.000000000000000)
-
-        self.formLayout.setWidget(0, QFormLayout.ItemRole.FieldRole, self.doubleSpinBoxLineWidth)
-
-        self.label = QLabel(self.groupBox)
-        self.label.setObjectName(u"label")
-
-        self.formLayout.setWidget(2, QFormLayout.ItemRole.LabelRole, self.label)
-
-        self.label_2 = QLabel(self.groupBox)
-        self.label_2.setObjectName(u"label_2")
-
-        self.formLayout.setWidget(4, QFormLayout.ItemRole.LabelRole, self.label_2)
-
-        self.label_3 = QLabel(self.groupBox)
-        self.label_3.setObjectName(u"label_3")
-
-        self.formLayout.setWidget(6, QFormLayout.ItemRole.LabelRole, self.label_3)
-
-        self.horizontalLayout_4 = QHBoxLayout()
-        self.horizontalLayout_4.setObjectName(u"horizontalLayout_4")
-        self.lineEditLeftColour = QLineEdit(self.groupBox)
-        self.lineEditLeftColour.setObjectName(u"lineEditLeftColour")
-        self.lineEditLeftColour.setMaxLength(7)
-
-        self.horizontalLayout_4.addWidget(self.lineEditLeftColour)
-
-        self.labelLeftColour = QLabel(self.groupBox)
-        self.labelLeftColour.setObjectName(u"labelLeftColour")
-        sizePolicy.setHeightForWidth(self.labelLeftColour.sizePolicy().hasHeightForWidth())
-        self.labelLeftColour.setSizePolicy(sizePolicy)
-        self.labelLeftColour.setMinimumSize(QSize(18, 18))
-        self.labelLeftColour.setStyleSheet(u"border: 1px solid black;\n"
-"border-radius: 2px; \n"
-"background-color: #FFFFFF")
-
-        self.horizontalLayout_4.addWidget(self.labelLeftColour)
-
-
-        self.formLayout.setLayout(2, QFormLayout.ItemRole.FieldRole, self.horizontalLayout_4)
-
-        self.horizontalLayout_5 = QHBoxLayout()
-        self.horizontalLayout_5.setObjectName(u"horizontalLayout_5")
-        self.lineEditRightColour = QLineEdit(self.groupBox)
-        self.lineEditRightColour.setObjectName(u"lineEditRightColour")
-        self.lineEditRightColour.setMaxLength(7)
-
-        self.horizontalLayout_5.addWidget(self.lineEditRightColour)
-
-        self.labelRightColour = QLabel(self.groupBox)
-        self.labelRightColour.setObjectName(u"labelRightColour")
-        sizePolicy.setHeightForWidth(self.labelRightColour.sizePolicy().hasHeightForWidth())
-        self.labelRightColour.setSizePolicy(sizePolicy)
-        self.labelRightColour.setMinimumSize(QSize(18, 18))
-        self.labelRightColour.setStyleSheet(u"border: 1px solid black;\n"
-"border-radius: 2px; \n"
-"background-color: #FFFFFF")
-
-        self.horizontalLayout_5.addWidget(self.labelRightColour)
-
-
-        self.formLayout.setLayout(4, QFormLayout.ItemRole.FieldRole, self.horizontalLayout_5)
-
-        self.horizontalLayout_6 = QHBoxLayout()
-        self.horizontalLayout_6.setObjectName(u"horizontalLayout_6")
-        self.lineEditSelectionColour = QLineEdit(self.groupBox)
-        self.lineEditSelectionColour.setObjectName(u"lineEditSelectionColour")
-        self.lineEditSelectionColour.setMaxLength(7)
-
-        self.horizontalLayout_6.addWidget(self.lineEditSelectionColour)
-
-        self.labelSelectionColour = QLabel(self.groupBox)
-        self.labelSelectionColour.setObjectName(u"labelSelectionColour")
-        sizePolicy.setHeightForWidth(self.labelSelectionColour.sizePolicy().hasHeightForWidth())
-        self.labelSelectionColour.setSizePolicy(sizePolicy)
-        self.labelSelectionColour.setMinimumSize(QSize(18, 18))
-        self.labelSelectionColour.setStyleSheet(u"border: 1px solid black;\n"
-"border-radius: 2px; \n"
-"background-color: #FFFFFF")
-
-        self.horizontalLayout_6.addWidget(self.labelSelectionColour)
-
-
-        self.formLayout.setLayout(6, QFormLayout.ItemRole.FieldRole, self.horizontalLayout_6)
-
-
-        self.verticalLayout.addWidget(self.groupBox)
-
-        self.groupBox_2 = QGroupBox(OptionsDialog)
-        self.groupBox_2.setObjectName(u"groupBox_2")
-        self.formLayout_2 = QFormLayout(self.groupBox_2)
-        self.formLayout_2.setObjectName(u"formLayout_2")
-        self.checkBoxOptimiseKneeAxis = QCheckBox(self.groupBox_2)
-        self.checkBoxOptimiseKneeAxis.setObjectName(u"checkBoxOptimiseKneeAxis")
-        self.checkBoxOptimiseKneeAxis.setChecked(False)
-
-        self.formLayout_2.setWidget(0, QFormLayout.ItemRole.LabelRole, self.checkBoxOptimiseKneeAxis)
-
-
-        self.verticalLayout.addWidget(self.groupBox_2)
-
-        self.groupBox_4 = QGroupBox(OptionsDialog)
-        self.groupBox_4.setObjectName(u"groupBox_4")
-        self.gridLayout = QGridLayout(self.groupBox_4)
-        self.gridLayout.setObjectName(u"gridLayout")
-        self.checkBoxFilterTRC = QCheckBox(self.groupBox_4)
-        self.checkBoxFilterTRC.setObjectName(u"checkBoxFilterTRC")
-
-        self.gridLayout.addWidget(self.checkBoxFilterTRC, 0, 0, 1, 1)
-
-        self.checkBoxFilterGRF = QCheckBox(self.groupBox_4)
-        self.checkBoxFilterGRF.setObjectName(u"checkBoxFilterGRF")
-
-        self.gridLayout.addWidget(self.checkBoxFilterGRF, 1, 0, 1, 1)
-
-
-        self.verticalLayout.addWidget(self.groupBox_4)
-
-        self.groupBox_5 = QGroupBox(OptionsDialog)
-        self.groupBox_5.setObjectName(u"groupBox_5")
-        self.verticalLayout_2 = QVBoxLayout(self.groupBox_5)
-        self.verticalLayout_2.setObjectName(u"verticalLayout_2")
-        self.checkBoxCustomTaskSet = QCheckBox(self.groupBox_5)
-        self.checkBoxCustomTaskSet.setObjectName(u"checkBoxCustomTaskSet")
-
-        self.verticalLayout_2.addWidget(self.checkBoxCustomTaskSet)
-
-        self.horizontalLayout_7 = QHBoxLayout()
-        self.horizontalLayout_7.setObjectName(u"horizontalLayout_7")
-        self.labelIKTaskSet = QLabel(self.groupBox_5)
-        self.labelIKTaskSet.setObjectName(u"labelIKTaskSet")
-
-        self.horizontalLayout_7.addWidget(self.labelIKTaskSet)
-
-        self.lineEditIKTaskSet = QLineEdit(self.groupBox_5)
-        self.lineEditIKTaskSet.setObjectName(u"lineEditIKTaskSet")
-
-        self.horizontalLayout_7.addWidget(self.lineEditIKTaskSet)
-
-        self.pushButtonIKTaskSetChooser = QPushButton(self.groupBox_5)
-        self.pushButtonIKTaskSetChooser.setObjectName(u"pushButtonIKTaskSetChooser")
-        sizePolicy.setHeightForWidth(self.pushButtonIKTaskSetChooser.sizePolicy().hasHeightForWidth())
-        self.pushButtonIKTaskSetChooser.setSizePolicy(sizePolicy)
-        self.pushButtonIKTaskSetChooser.setStyleSheet(u"padding: 3px 8px;")
-
-        self.horizontalLayout_7.addWidget(self.pushButtonIKTaskSetChooser)
-
-
-        self.verticalLayout_2.addLayout(self.horizontalLayout_7)
-
-
-        self.verticalLayout.addWidget(self.groupBox_5)
-
         self.groupBox_6 = QGroupBox(OptionsDialog)
         self.groupBox_6.setObjectName(u"groupBox_6")
         self.verticalLayout_3 = QVBoxLayout(self.groupBox_6)
@@ -258,23 +94,6 @@ class Ui_OptionsDialog(object):
 
 
         self.verticalLayout.addWidget(self.groupBox_6)
-
-        self.groupBox_7 = QGroupBox(OptionsDialog)
-        self.groupBox_7.setObjectName(u"groupBox_7")
-        self.verticalLayout_4 = QVBoxLayout(self.groupBox_7)
-        self.verticalLayout_4.setObjectName(u"verticalLayout_4")
-        self.checkBoxRunningGait = QCheckBox(self.groupBox_7)
-        self.checkBoxRunningGait.setObjectName(u"checkBoxRunningGait")
-
-        self.verticalLayout_4.addWidget(self.checkBoxRunningGait)
-
-        self.checkBoxOutputGRFs = QCheckBox(self.groupBox_7)
-        self.checkBoxOutputGRFs.setObjectName(u"checkBoxOutputGRFs")
-
-        self.verticalLayout_4.addWidget(self.checkBoxOutputGRFs)
-
-
-        self.verticalLayout.addWidget(self.groupBox_7)
 
         self.horizontalLayout_3 = QHBoxLayout()
         self.horizontalLayout_3.setObjectName(u"horizontalLayout_3")
@@ -310,31 +129,8 @@ class Ui_OptionsDialog(object):
         self.labelOutputDirectory.setText(QCoreApplication.translate("OptionsDialog", u"Output Data Directory:", None))
         self.pushButtonRootOutputChooser.setText(QCoreApplication.translate("OptionsDialog", u"...", None))
         self.pushButtonRootInputChooser.setText(QCoreApplication.translate("OptionsDialog", u"...", None))
-        self.groupBox.setTitle(QCoreApplication.translate("OptionsDialog", u"Plots", None))
-        self.labelLineWidth.setText(QCoreApplication.translate("OptionsDialog", u"Line Width:", None))
-        self.label.setText(QCoreApplication.translate("OptionsDialog", u"Left Side Colour:", None))
-        self.label_2.setText(QCoreApplication.translate("OptionsDialog", u"Right Side Colour:", None))
-        self.label_3.setText(QCoreApplication.translate("OptionsDialog", u"Selection Colour:", None))
-        self.lineEditLeftColour.setText(QCoreApplication.translate("OptionsDialog", u"#FFFFFF", None))
-        self.labelLeftColour.setText("")
-        self.lineEditRightColour.setText(QCoreApplication.translate("OptionsDialog", u"#FFFFFF", None))
-        self.labelRightColour.setText("")
-        self.lineEditSelectionColour.setText(QCoreApplication.translate("OptionsDialog", u"#FFFFFF", None))
-        self.labelSelectionColour.setText("")
-        self.groupBox_2.setTitle(QCoreApplication.translate("OptionsDialog", u"OpenSim Model", None))
-        self.checkBoxOptimiseKneeAxis.setText(QCoreApplication.translate("OptionsDialog", u"Perform knee-axis optimisation", None))
-        self.groupBox_4.setTitle(QCoreApplication.translate("OptionsDialog", u"Filtering", None))
-        self.checkBoxFilterTRC.setText(QCoreApplication.translate("OptionsDialog", u"Filter TRC data", None))
-        self.checkBoxFilterGRF.setText(QCoreApplication.translate("OptionsDialog", u"Filter GRF data", None))
-        self.groupBox_5.setTitle(QCoreApplication.translate("OptionsDialog", u"Inverse Kinematics", None))
-        self.checkBoxCustomTaskSet.setText(QCoreApplication.translate("OptionsDialog", u"Use custom IK task set file", None))
-        self.labelIKTaskSet.setText(QCoreApplication.translate("OptionsDialog", u"IK task set file:", None))
-        self.pushButtonIKTaskSetChooser.setText(QCoreApplication.translate("OptionsDialog", u"...", None))
         self.groupBox_6.setTitle(QCoreApplication.translate("OptionsDialog", u"Anthropometrics", None))
         self.checkBoxApproximateAnthropometrics.setText(QCoreApplication.translate("OptionsDialog", u"Approximate missing anthropometrics", None))
-        self.groupBox_7.setTitle(QCoreApplication.translate("OptionsDialog", u"Experimental", None))
-        self.checkBoxRunningGait.setText(QCoreApplication.translate("OptionsDialog", u"Running gait", None))
-        self.checkBoxOutputGRFs.setText(QCoreApplication.translate("OptionsDialog", u"Output GRF data to CSV", None))
         self.pushButtonOK.setText(QCoreApplication.translate("OptionsDialog", u"OK", None))
         self.pushButtonCancel.setText(QCoreApplication.translate("OptionsDialog", u"Cancel", None))
     # retranslateUi

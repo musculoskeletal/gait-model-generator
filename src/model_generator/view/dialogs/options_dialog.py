@@ -2,11 +2,9 @@
 import os
 
 from PySide6.QtWidgets import QDialog, QFileDialog
-from PySide6.QtGui import QRegularExpressionValidator
-from PySide6.QtCore import QRegularExpression
 
-from c3d_parser.view.ui.ui_options_dialog import Ui_OptionsDialog
-from c3d_parser.settings.general import DEFAULT_STYLE_SHEET, INVALID_STYLE_SHEET
+from model_generator.view.ui.ui_options_dialog import Ui_OptionsDialog
+from model_generator.settings.general import DEFAULT_STYLE_SHEET, INVALID_STYLE_SHEET
 
 
 class OptionsDialog(QDialog):
@@ -16,14 +14,6 @@ class OptionsDialog(QDialog):
         self._ui = Ui_OptionsDialog()
         self._ui.setupUi(self)
 
-        self._colour_boxes = {
-            self._ui.lineEditLeftColour: self._ui.labelLeftColour,
-            self._ui.lineEditRightColour: self._ui.labelRightColour,
-            self._ui.lineEditSelectionColour: self._ui.labelSelectionColour
-        }
-
-        self._setup_colour_settings()
-        self._setup_ik_settings()
         self._disable_default_button_selection()
 
         self._make_connections()
@@ -33,82 +23,23 @@ class OptionsDialog(QDialog):
         self._ui.lineEditRootOutput.textChanged.connect(self._validate_data_directory)
         self._ui.pushButtonRootInputChooser.clicked.connect(self._open_input_directory_chooser)
         self._ui.pushButtonRootOutputChooser.clicked.connect(self._open_output_directory_chooser)
-        self._ui.checkBoxCustomTaskSet.toggled.connect(self._toggle_ik_task_set)
-        self._ui.lineEditIKTaskSet.textChanged.connect(self._validate_ik_task_set_path)
-        self._ui.pushButtonIKTaskSetChooser.clicked.connect(self._open_ik_task_set_chooser)
-
-    def _setup_colour_settings(self):
-        self._validator = QRegularExpressionValidator(QRegularExpression("^#[0-9A-Fa-f]{6}$"))
-        self._ui.lineEditLeftColour.setValidator(self._validator)
-        self._ui.lineEditLeftColour.textChanged.connect(self._colour_code_changed)
-        self._ui.lineEditRightColour.setValidator(self._validator)
-        self._ui.lineEditRightColour.textChanged.connect(self._colour_code_changed)
-        self._ui.lineEditSelectionColour.setValidator(self._validator)
-        self._ui.lineEditSelectionColour.textChanged.connect(self._colour_code_changed)
-
-    def _setup_ik_settings(self):
-        self._toggle_ik_task_set(self._ui.checkBoxCustomTaskSet.isChecked())
-
-    def _colour_code_changed(self, text):
-        line_edit = self.sender()
-        state, _, _ = self._validator.validate(text, 0)
-        if state == QRegularExpressionValidator.State.Acceptable:
-            line_edit.setStyleSheet(DEFAULT_STYLE_SHEET)
-            colour_box = self._colour_boxes[line_edit]
-            colour_box.setStyleSheet(f"border: 1px solid black;"
-                f"border-radius: 2px; background-color: {text};")
-        else:
-            line_edit.setStyleSheet(INVALID_STYLE_SHEET)
 
     def _disable_default_button_selection(self):
         self._ui.pushButtonOK.setAutoDefault(False)
         self._ui.pushButtonCancel.setAutoDefault(False)
         self._ui.pushButtonRootInputChooser.setAutoDefault(False)
         self._ui.pushButtonRootOutputChooser.setAutoDefault(False)
-        self._ui.pushButtonIKTaskSetChooser.setAutoDefault(False)
-
-    def _toggle_ik_task_set(self, checked):
-        self._ui.labelIKTaskSet.setEnabled(checked)
-        self._ui.lineEditIKTaskSet.setEnabled(checked)
-        self._ui.pushButtonIKTaskSetChooser.setEnabled(checked)
-
-    def _validate_ik_task_set_path(self):
-        path = self._ui.lineEditIKTaskSet.text()
-        valid = os.path.isfile(path) and path.lower().endswith(".xml")
-        self._ui.lineEditIKTaskSet.setStyleSheet(DEFAULT_STYLE_SHEET if valid else INVALID_STYLE_SHEET)
 
     def load(self, options):
-        self._ui.doubleSpinBoxLineWidth.setValue(options['line_width'])
         self._ui.lineEditRootInput.setText(options['input_data_directory'])
         self._ui.lineEditRootOutput.setText(options['output_data_directory'])
-        self._ui.checkBoxOptimiseKneeAxis.setChecked(options['optimise_knee_axis'])
-        self._ui.lineEditLeftColour.setText(options['colour_left'])
-        self._ui.lineEditRightColour.setText(options['colour_right'])
-        self._ui.lineEditSelectionColour.setText(options['colour_selection'])
-        self._ui.checkBoxFilterTRC.setChecked(options['filter_trc'])
-        self._ui.checkBoxFilterGRF.setChecked(options['filter_grf'])
-        self._ui.checkBoxCustomTaskSet.setChecked(options['use_custom_ik_task_set'])
-        self._ui.lineEditIKTaskSet.setText(options['ik_task_set_path'])
         self._ui.checkBoxApproximateAnthropometrics.setChecked(options['approximate_anthropometrics'])
-        self._ui.checkBoxRunningGait.setChecked(options['running_gait'])
-        self._ui.checkBoxOutputGRFs.setChecked(options['output_grf'])
 
     def save(self):
         options = {
-            'line_width': self._ui.doubleSpinBoxLineWidth.value(),
             'input_data_directory': self._ui.lineEditRootInput.text(),
             'output_data_directory': self._ui.lineEditRootOutput.text(),
-            'optimise_knee_axis': self._ui.checkBoxOptimiseKneeAxis.isChecked(),
-            'colour_left': self._ui.lineEditLeftColour.text(),
-            'colour_right': self._ui.lineEditRightColour.text(),
-            'colour_selection': self._ui.lineEditSelectionColour.text(),
-            'filter_trc': self._ui.checkBoxFilterTRC.isChecked(),
-            'filter_grf': self._ui.checkBoxFilterGRF.isChecked(),
-            'use_custom_ik_task_set': self._ui.checkBoxCustomTaskSet.isChecked(),
-            'ik_task_set_path': self._ui.lineEditIKTaskSet.text(),
             'approximate_anthropometrics': self._ui.checkBoxApproximateAnthropometrics.isChecked(),
-            'running_gait': self._ui.checkBoxRunningGait.isChecked(),
-            'output_grf': self._ui.checkBoxOutputGRFs.isChecked(),
         }
 
         return options
@@ -135,14 +66,3 @@ class OptionsDialog(QDialog):
 
         if directory:
             line_edit.setText(directory)
-
-    def _open_ik_task_set_chooser(self):
-        current_path = self._ui.lineEditIKTaskSet.text()
-        if not os.path.isfile(current_path):
-            current_path = ''
-
-        file_path, _ = QFileDialog.getOpenFileName(
-            self, 'Select File', current_path, 'XML Files (*.xml)')
-
-        if file_path:
-            self._ui.lineEditIKTaskSet.setText(file_path)
