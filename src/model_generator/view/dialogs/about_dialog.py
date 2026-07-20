@@ -1,13 +1,12 @@
 
-import os
 import importlib
 
 from PySide6 import QtWidgets
 from PySide6.QtCore import Qt
 from PySide6.QtGui import QFont
 
-from c3d_parser import __version__
-from c3d_parser.settings.general import APPLICATION_NAME
+from model_generator import __version__
+from model_generator.settings.general import APPLICATION_NAME
 
 
 class AboutDialog(QtWidgets.QDialog):
@@ -28,7 +27,8 @@ class AboutDialog(QtWidgets.QDialog):
         packages = [
             ("OpenSim", "opensim"),
             ("opensim-model-creator", "opensim-model-creator"),
-            ("articulated-ssm", "articulated-ssm")
+            ("articulated-ssm", "articulated-ssm"),
+            ("c3d-parser", "c3d-parser")
         ]
 
         table = QtWidgets.QTableWidget(0, 2)
