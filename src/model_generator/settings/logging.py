@@ -59,7 +59,7 @@ def get_log_directory():
 
 
 def initialise_logger():
-    log_file = os.path.join(get_log_directory(), 'c3d_parser.log')
+    log_file = os.path.join(get_log_directory(), 'model_generator.log')
 
     logging.basicConfig(format='%(asctime)s - %(levelname)s - %(message)s', level=logging.INFO, datefmt='%d/%m/%Y - %H:%M:%S')
 
