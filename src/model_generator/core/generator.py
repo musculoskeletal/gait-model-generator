@@ -8,7 +8,7 @@ from model_generator.settings.logging import logger
 
 
 def generate_model(static_trial, input_directory, output_directory, lab, marker_diameter, static_data,
-                   left_foot_flat, right_foot_flat, progress_tracker):
+                   left_foot_flat, right_foot_flat, toe_marker_proximal, progress_tracker):
     """
     Generate an OpenSim model according to the static pose and anthropometric information.
 
@@ -24,8 +24,8 @@ def generate_model(static_trial, input_directory, output_directory, lab, marker_
 
     logger.info("Fitting shape model.")
     model_path = create_osim_model(static_trc, "", static_frame, marker_diameter, static_data, output_directory,
-                                   left_foot_flat, right_foot_flat, optimise_knee_axis=False,
-                                   progress_tracker=progress_tracker)
+                                   left_foot_flat, right_foot_flat, toe_marker_proximal=toe_marker_proximal,
+                                   optimise_knee_axis=False, progress_tracker=progress_tracker)
 
     logger.info(f"Generated model: {os.path.normpath(model_path)}.")
 

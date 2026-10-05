@@ -291,6 +291,7 @@ class MainWindow(QMainWindow):
 
         lab = self._ui.comboBoxLab.currentText()
         marker_diameter = self._ui.doubleSpinBoxMarkerDiameter.value()
+        toe_marker_proximal = self._ui.radioButtonProximal.isChecked()
         left_foot_flat = self._ui.checkBoxLeftFootFlat.isChecked()
         right_foot_flat = self._ui.checkBoxRightFootFlat.isChecked()
 
@@ -328,7 +329,7 @@ class MainWindow(QMainWindow):
 
         self._worker = _ExecThread(generate_model, static_trial, input_directory, self._output_directory,
                                    lab, marker_diameter, static_data, left_foot_flat, right_foot_flat,
-                                   self._progress_tracker)
+                                   toe_marker_proximal, self._progress_tracker)
         self._worker.finished.connect(self._parse_finished)
         self._worker.cancelled.connect(self._parse_cancelled)
         self._worker.failed.connect(self._parse_failed)
@@ -433,6 +434,7 @@ class MainWindow(QMainWindow):
         settings.setValue('is_maximized', self.isMaximized())
         settings.setValue('lab', self._ui.comboBoxLab.currentText())
         settings.setValue('marker_diameter', self._ui.doubleSpinBoxMarkerDiameter.value())
+        settings.setValue('toe_marker_proximal', self._ui.radioButtonProximal.isChecked())
         settings.setValue('left_foot_flat', self._ui.checkBoxLeftFootFlat.isChecked())
         settings.setValue('right_foot_flat', self._ui.checkBoxRightFootFlat.isChecked())
         settings.endGroup()
@@ -460,6 +462,10 @@ class MainWindow(QMainWindow):
             self._ui.comboBoxLab.setCurrentText(settings.value('lab'))
         if settings.contains('marker_diameter'):
             self._ui.doubleSpinBoxMarkerDiameter.setValue(float(settings.value('marker_diameter')))
+        if settings.contains('toe_marker_proximal'):
+            proximal = settings.value('toe_marker_proximal') == 'true'
+            self._ui.radioButtonProximal.setChecked(proximal)
+            self._ui.radioButtonMetHead.setChecked(not proximal)
         if settings.contains('left_foot_flat'):
             self._ui.checkBoxLeftFootFlat.setChecked(settings.value('left_foot_flat') == 'true')
         if settings.contains('right_foot_flat'):

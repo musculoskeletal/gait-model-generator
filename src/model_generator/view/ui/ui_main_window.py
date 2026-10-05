@@ -20,9 +20,9 @@ from PySide6.QtWidgets import (QAbstractItemView, QApplication, QCheckBox, QComb
     QDoubleSpinBox, QFrame, QGroupBox, QHBoxLayout,
     QHeaderView, QLabel, QLineEdit, QMainWindow,
     QMenu, QMenuBar, QProgressBar, QPushButton,
-    QSizePolicy, QSpacerItem, QSpinBox, QSplitter,
-    QTabWidget, QTableWidget, QTableWidgetItem, QVBoxLayout,
-    QWidget)
+    QRadioButton, QSizePolicy, QSpacerItem, QSpinBox,
+    QSplitter, QTabWidget, QTableWidget, QTableWidgetItem,
+    QVBoxLayout, QWidget)
 from . import resources_rc
 
 class Ui_MainWindow(object):
@@ -391,6 +391,24 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_2.addWidget(self.groupBox_4)
 
+        self.groupBox_6 = QGroupBox(self.frameTrial)
+        self.groupBox_6.setObjectName(u"groupBox_6")
+        self.horizontalLayout_11 = QHBoxLayout(self.groupBox_6)
+        self.horizontalLayout_11.setObjectName(u"horizontalLayout_11")
+        self.radioButtonProximal = QRadioButton(self.groupBox_6)
+        self.radioButtonProximal.setObjectName(u"radioButtonProximal")
+
+        self.horizontalLayout_11.addWidget(self.radioButtonProximal)
+
+        self.radioButtonMetHead = QRadioButton(self.groupBox_6)
+        self.radioButtonMetHead.setObjectName(u"radioButtonMetHead")
+        self.radioButtonMetHead.setChecked(True)
+
+        self.horizontalLayout_11.addWidget(self.radioButtonMetHead)
+
+
+        self.verticalLayout_2.addWidget(self.groupBox_6)
+
         self.groupBox_5 = QGroupBox(self.frameTrial)
         self.groupBox_5.setObjectName(u"groupBox_5")
         self.horizontalLayout_19 = QHBoxLayout(self.groupBox_5)
@@ -616,6 +634,9 @@ class Ui_MainWindow(object):
         self.label_14.setText(QCoreApplication.translate("MainWindow", u"Ankle Width (mm):", None))
         self.groupBox_4.setTitle(QCoreApplication.translate("MainWindow", u"Marker", None))
         self.label_3.setText(QCoreApplication.translate("MainWindow", u"Marker Diameter (mm):", None))
+        self.groupBox_6.setTitle(QCoreApplication.translate("MainWindow", u"Toe Markers", None))
+        self.radioButtonProximal.setText(QCoreApplication.translate("MainWindow", u"Proximal", None))
+        self.radioButtonMetHead.setText(QCoreApplication.translate("MainWindow", u"2nd/3rd Met", None))
         self.groupBox_5.setTitle("")
         self.checkBoxLeftFootFlat.setText(QCoreApplication.translate("MainWindow", u"Left Foot Flat", None))
         self.checkBoxRightFootFlat.setText(QCoreApplication.translate("MainWindow", u"Right Foot Flat", None))
