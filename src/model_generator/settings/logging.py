@@ -6,6 +6,8 @@ import warnings
 from PySide6.QtGui import QColor
 from PySide6.QtCore import QObject, Signal
 
+from c3d_parser.settings.logging import logger as c3d_parser_logger
+
 from model_generator.settings.general import APPLICATION_NAME, get_app_directory
 
 
@@ -73,6 +75,10 @@ def initialise_logger():
     signal_handler.setFormatter(formatter)
     logger.base_logger.addHandler(signal_handler)
     logger.set_emitter(signal_handler.emitter)
+
+    # Re-route C3D-Parser log messages.
+    c3d_parser_logger.base_logger.addHandler(file_handler)
+    c3d_parser_logger.base_logger.addHandler(signal_handler)
 
 
 def filter_c3d_warnings():
