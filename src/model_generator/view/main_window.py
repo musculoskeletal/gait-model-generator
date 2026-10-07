@@ -68,8 +68,6 @@ class MainWindow(QMainWindow):
         self._output_data_directory = ''
         self._approximate_anthropometrics = False
 
-        self._static_trial = None
-
         self._disable_spin_box_scrolling()
         self._setup_combo_boxes()
         self._make_connections()
@@ -80,7 +78,6 @@ class MainWindow(QMainWindow):
         self._setup_log_tab()
 
     def _setup_progress_bar(self):
-        self._progress_text = ""
         self._progress_value = 0
         self._ui.progressBar.setVisible(False)
 
@@ -116,7 +113,6 @@ class MainWindow(QMainWindow):
         self._plotter.clear_actors()
 
     def _clear_progress_bar(self):
-        self._progress_text = ""
         self._ui.labelProgress.setText("")
         self._progress_value = 0
         self._ui.progressBar.setValue(0)
@@ -172,7 +168,6 @@ class MainWindow(QMainWindow):
             self._update_subject_info()
             self._clear_visualiser()
         else:
-            self._static_trial = None
             self._clear_subject_info()
 
     def _validate_directory(self):
@@ -211,10 +206,8 @@ class MainWindow(QMainWindow):
     def _update_subject_info(self):
         static_trial = self._ui.lineEditInputTrial.text()
 
-        if static_trial != self._static_trial:
-            self._clear_subject_info()
-            self._set_subject_info(static_trial)
-            self._static_trial = static_trial
+        self._clear_subject_info()
+        self._set_subject_info(static_trial)
 
         # Fill in any anthropometric gaps.
         if self._approximate_anthropometrics:
@@ -363,7 +356,6 @@ class MainWindow(QMainWindow):
 
     def _update_progress(self, message, color):
         self._ui.labelProgress.setText(message)
-        self._progress_text = message
         self._ui.labelProgress.setStyleSheet(f"color: {color};")
 
         self._progress_value = min(self._progress_value + 20, 100)
