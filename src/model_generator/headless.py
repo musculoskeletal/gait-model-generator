@@ -5,7 +5,7 @@ import traceback
 
 from PySide6.QtCore import QCoreApplication
 
-from c3d_parser.core.c3d_parser import extract_static_data, ParserError
+from c3d_parser.core.c3d_parser import extract_static_data, approximate_anthropometrics, ParserError
 
 from model_generator.core.generator import generate_model
 from model_generator.settings.general import set_applications_settings, setup_marker_maps_dir, output_directory_name
@@ -18,6 +18,14 @@ subject_keys = {
     'height': 'Height',
     'mass': 'Weight',
     'asis_width': 'ASIS Width',
+    'left_knee_width': 'Left Knee Width',
+    'right_knee_width': 'Right Knee Width',
+    'left_ankle_width': 'Left Ankle Width',
+    'right_ankle_width': 'Right Ankle Width',
+}
+
+approximation_keys = {
+    'inter_asis_distance': 'ASIS Width',
     'left_knee_width': 'Left Knee Width',
     'right_knee_width': 'Right Knee Width',
     'left_ankle_width': 'Left Ankle Width',
@@ -47,6 +55,13 @@ def run(args):
     for key, model_key in subject_keys.items():
         value = getattr(args, key)
         static_data[model_key] = value if value is not None else c3d_data.get(key)
+
+    # Fill any gaps with values approximated from the marker data.
+    if args.approximate_anthropometrics:
+        anthropometrics = approximate_anthropometrics(args.trial, args.lab, args.marker_diameter)
+        for key, model_key in approximation_keys.items():
+            if not static_data[model_key]:
+                static_data[model_key] = anthropometrics[key]
 
     static_trial_path = os.path.normpath(args.trial)
     try:
