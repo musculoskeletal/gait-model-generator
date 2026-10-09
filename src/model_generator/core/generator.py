@@ -2,7 +2,7 @@
 import os
 
 from c3d_parser.core.utils import clear_directory
-from c3d_parser.core.c3d_parser import parse_static_trial, create_osim_model
+from c3d_parser.core.c3d_parser import parse_static_trial, create_osim_model, validate_static_data
 
 from model_generator.settings.logging import logger
 
@@ -14,6 +14,7 @@ def generate_model(static_trial, input_directory, output_directory, lab, marker_
 
     Returns the path of the generated model.
     """
+    validate_static_data(static_data)
     clear_directory(output_directory)
 
     logger.info(f"Generating model from session {os.path.normpath(input_directory)}.")

@@ -9,7 +9,7 @@ from pyvistaqt import QtInteractor
 from ll_visualiser.visualiser import visualise_model
 
 from c3d_parser.core.c3d_parser import (extract_static_data, extract_marker_names, CancelException,
-    approximate_anthropometrics)
+    approximate_anthropometrics, height_to_mm)
 
 from model_generator.core.generator import generate_model
 
@@ -228,8 +228,7 @@ class MainWindow(QMainWindow):
 
         # Check height units.
         height = self._ui.doubleSpinBoxHeight.value()
-        if height < 250:
-            self._ui.doubleSpinBoxHeight.setValue(height * 10)
+        self._ui.doubleSpinBoxHeight.setValue(height_to_mm(height))
 
     def _clear_subject_info(self):
         self._ui.comboBoxSex.setCurrentIndex(-1)
@@ -300,17 +299,9 @@ class MainWindow(QMainWindow):
             'Right Ankle Width': self._ui.doubleSpinBoxRightAnkleWidth.value(),
         }
 
-        # Cap age at 18.
-        # Current shape model is paediatric only, ages over 18 can give strange results.
-        static_data['Age'] = min(static_data['Age'], 18)
-
         missing = [key for key, value in static_data.items() if not value]
         if missing:
             QMessageBox.warning(self, "Warning", "Subject measurements missing:\n- " + "\n- ".join(missing))
-            return
-
-        if static_data['Height'] < 300:
-            QMessageBox.warning(self, "Warning", "Please ensure subject height is in mm.")
             return
 
         self._ui.pushButtonParseData.setEnabled(False)
