@@ -1,13 +1,14 @@
 
 import sys
 import ctypes
+import argparse
 
-from model_generator.settings.general import (set_applications_settings, application_instance_exists,
-    start_application_server, setup_marker_maps_dir)
+from model_generator.settings.general import (APPLICATION_NAME, set_applications_settings,
+    application_instance_exists, start_application_server, setup_marker_maps_dir)
 from model_generator.settings.logging import initialise_logger, filter_c3d_warnings
 
 
-def main():
+def windows_main():
     if sys.platform == 'win32':
         my_app_id = 'Motion_Connect.Model_Generator'
         ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(my_app_id)
@@ -43,7 +44,30 @@ def main():
     splash.showMessage('Load complete ...', 100)
     splash.finish(window)
 
-    sys.exit(app.exec())
+    return app.exec()
+
+
+def sans_gui_main():
+    pass
+
+
+def _parse_args():
+    parser = argparse.ArgumentParser(prog=APPLICATION_NAME)
+    subparsers = parser.add_subparsers(dest="command")
+    subparsers.add_parser("headless", help="Run Model-Generator in headless mode.")
+
+    return parser.parse_args()
+
+
+def main():
+    args = _parse_args()
+
+    if args.command == "headless":
+        result = sans_gui_main()
+    else:
+        result = windows_main()
+
+    sys.exit(result)
 
 
 if __name__ == '__main__':
