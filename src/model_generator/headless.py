@@ -1,11 +1,13 @@
 
 import os
 import sys
+import traceback
 
 from PySide6.QtCore import QCoreApplication
 
-from c3d_parser.core.c3d_parser import extract_static_data
+from c3d_parser.core.c3d_parser import extract_static_data, ParserError
 
+from model_generator.core.generator import generate_model
 from model_generator.settings.general import set_applications_settings, setup_marker_maps_dir, output_directory_name
 from model_generator.settings.logging import logger, initialise_logger
 
@@ -45,3 +47,15 @@ def run(args):
     for key, model_key in subject_keys.items():
         value = getattr(args, key)
         static_data[model_key] = value if value is not None else c3d_data.get(key)
+
+    static_trial_path = os.path.normpath(args.trial)
+    try:
+        generate_model(os.path.basename(static_trial_path), os.path.dirname(static_trial_path), output_directory,
+                       args.lab, args.marker_diameter, static_data, args.left_foot_flat, args.right_foot_flat,
+                       args.toe_marker_proximal, None)
+    except ParserError as e:
+        logger.error(e)
+        return 1
+    except Exception as e:
+        logger.error(f'Unexpected error: {e}\n{traceback.format_exc()}')
+        return 1
