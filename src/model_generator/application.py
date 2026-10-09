@@ -51,10 +51,45 @@ def sans_gui_main():
     pass
 
 
+def _sex(value):
+    sexes = {'f': 'Female', 'female': 'Female', 'm': 'Male', 'male': 'Male'}
+    if value.lower() not in sexes:
+        raise argparse.ArgumentTypeError(f"invalid choice: '{value}' (choose from female, male, f, m)")
+    return sexes[value.lower()]
+
+
 def _parse_args():
     parser = argparse.ArgumentParser(prog=APPLICATION_NAME)
     subparsers = parser.add_subparsers(dest="command")
-    subparsers.add_parser("headless", help="Run Model-Generator in headless mode.")
+
+    headless_parser = subparsers.add_parser("headless", help="Run Model-Generator in headless mode.")
+    headless_parser.add_argument("trial", help="Static trial C3D file.")
+    headless_parser.add_argument("--lab", required=True, help="Marker set name.")
+    headless_parser.add_argument("--output", help="Output folder (default: input directory).")
+    headless_parser.add_argument("--marker-diameter", type=float, default=14.0,
+                                 help="Marker diameter in mm (default: %(default)s).")
+    headless_parser.add_argument("--left-foot-flat", action=argparse.BooleanOptionalAction, default=True,
+                                 help="Left foot flat (default: on).")
+    headless_parser.add_argument("--right-foot-flat", action=argparse.BooleanOptionalAction, default=True,
+                                 help="Right foot flat (default: on).")
+    headless_parser.add_argument("--toe-marker-proximal", action="store_true",
+                                 help="Toe markers are proximal (default: 2nd/3rd metatarsal head).")
+    headless_parser.add_argument("--approximate-anthropometrics", action="store_true",
+                                 help="Approximate missing anthropometrics from marker data.")
+    headless_parser.add_argument("--overwrite", action="store_true",
+                                 help="Overwrite existing results in the output folder.")
+
+    subject_values = headless_parser.add_argument_group("subject values",
+                                                        "Override the values stored in the C3D file.")
+    subject_values.add_argument("--sex", type=_sex, help="female, male, f or m (any case).")
+    subject_values.add_argument("--age", type=int, help="Age in years.")
+    subject_values.add_argument("--height", type=float, help="Height in mm.")
+    subject_values.add_argument("--mass", type=float, help="Body mass in kg.")
+    subject_values.add_argument("--asis-width", type=float, help="Inter-ASIS distance in mm.")
+    subject_values.add_argument("--left-knee-width", type=float, help="Left knee width in mm.")
+    subject_values.add_argument("--right-knee-width", type=float, help="Right knee width in mm.")
+    subject_values.add_argument("--left-ankle-width", type=float, help="Left ankle width in mm.")
+    subject_values.add_argument("--right-ankle-width", type=float, help="Right ankle width in mm.")
 
     return parser.parse_args()
 
