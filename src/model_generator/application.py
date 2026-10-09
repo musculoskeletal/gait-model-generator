@@ -47,8 +47,9 @@ def windows_main():
     return app.exec()
 
 
-def sans_gui_main():
-    pass
+def sans_gui_main(args):
+    from model_generator.headless import run
+    return run(args)
 
 
 def _sex(value):
@@ -98,7 +99,7 @@ def main():
     args = _parse_args()
 
     if args.command == "headless":
-        result = sans_gui_main()
+        result = sans_gui_main(args)
     else:
         result = windows_main()
 
