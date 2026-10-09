@@ -1,11 +1,12 @@
 
+import os
 import sys
 
 from PySide6.QtCore import QCoreApplication
 
 from c3d_parser.core.c3d_parser import extract_static_data
 
-from model_generator.settings.general import set_applications_settings, setup_marker_maps_dir
+from model_generator.settings.general import set_applications_settings, setup_marker_maps_dir, output_directory_name
 from model_generator.settings.logging import logger, initialise_logger
 
 
@@ -30,6 +31,13 @@ def run(args):
     initialise_logger()
 
     logger.info(f"Static trial: {args.trial}")
+
+    output_directory = os.path.normpath(os.path.join(args.output or os.path.dirname(args.trial),
+                                                     output_directory_name))
+    if os.path.exists(output_directory) and not args.overwrite:
+        logger.error(f"The output directory already contains results: {output_directory}. "
+                     f"Use --overwrite to replace them.")
+        return 1
 
     # Read subject values from the C3D file, overwritten by any command line values.
     c3d_data = extract_static_data(args.trial)
