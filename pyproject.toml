@@ -27,5 +27,8 @@ dependencies = {file = ["requirements.txt"]}
 [project.urls]
 Repository = "https://github.com/tsalemink/Model-Generator"
 
+[project.scripts]
+model_generator_cli = "model_generator.application:main"
+
 [project.gui-scripts]
 model_generator = "model_generator.application:main"
