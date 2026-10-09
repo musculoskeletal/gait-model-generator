@@ -32,7 +32,6 @@ def windows_main():
 
     splash.showMessage('Initialising logger ...', 20)
     initialise_logger()
-    filter_c3d_warnings()
 
     splash.showMessage('Importing dependencies ...', 40)
     from model_generator.view.main_window import MainWindow
@@ -97,6 +96,7 @@ def _parse_args():
 
 def main():
     args = _parse_args()
+    filter_c3d_warnings()
 
     if args.command == "headless":
         result = sans_gui_main(args)
