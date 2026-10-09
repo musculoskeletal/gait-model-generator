@@ -16,6 +16,8 @@ VERSION = __version__
 DEFAULT_STYLE_SHEET = ''
 INVALID_STYLE_SHEET = 'background-color: rgba(239, 0, 0, 50)'
 
+output_directory_name = 'model_generator_output'
+
 script_directory = os.path.dirname(os.path.abspath(__file__))
 internal_maps_dir = os.path.join(script_directory, 'marker_maps')
 

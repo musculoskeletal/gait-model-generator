@@ -14,7 +14,7 @@ from c3d_parser.core.c3d_parser import (extract_static_data, extract_marker_name
 from model_generator.core.generator import generate_model
 
 from model_generator.settings.general import (APPLICATION_NAME, VERSION, DEFAULT_STYLE_SHEET, INVALID_STYLE_SHEET,
-                                              get_marker_maps_dir)
+                                              get_marker_maps_dir, output_directory_name)
 from c3d_parser.view.dialogs.marker_set_dialog import MarkerSetDialog
 from c3d_parser.view.dialogs.delete_marker_set_dialog import DeleteMarkerSetDialog
 
@@ -23,9 +23,6 @@ from model_generator.view.dialogs.options_dialog import OptionsDialog
 from model_generator.view.dialogs.about_dialog import AboutDialog
 from model_generator.view.utils import handle_runtime_error
 from model_generator.settings.logging import logger, log_colours
-
-
-output_directory_name = 'model_generator_output'
 
 
 class _ExecThread(QThread):
