@@ -1,4 +1,5 @@
 
+import os
 import sys
 import ctypes
 import argparse
@@ -58,12 +59,18 @@ def _sex(value):
     return sexes[value.lower()]
 
 
+def _c3d_file(value):
+    if not (os.path.isfile(value) and value.lower().endswith('.c3d')):
+        raise argparse.ArgumentTypeError(f"must be an existing .c3d file: '{value}'")
+    return value
+
+
 def _parse_args():
     parser = argparse.ArgumentParser(prog=APPLICATION_NAME)
     subparsers = parser.add_subparsers(dest="command")
 
     headless_parser = subparsers.add_parser("headless", help="Run Model-Generator in headless mode.")
-    headless_parser.add_argument("trial", help="Static trial C3D file.")
+    headless_parser.add_argument("trial", metavar="TRIAL", type=_c3d_file, help="Static trial C3D file.")
     headless_parser.add_argument("--lab", required=True, help="Marker set name.")
     headless_parser.add_argument("--output", help="Output folder (default: input directory).")
     headless_parser.add_argument("--marker-diameter", type=float, default=14.0,
