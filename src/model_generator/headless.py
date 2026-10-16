@@ -36,9 +36,14 @@ approximation_keys = {
 def run(args):
     app = QCoreApplication(sys.argv)
     set_applications_settings(app)
-    setup_marker_maps_dir()
+    marker_maps_directory = setup_marker_maps_dir()
 
     initialise_logger()
+
+    labs = sorted(os.path.splitext(lab)[0] for lab in os.listdir(marker_maps_directory))
+    if args.lab not in labs:
+        logger.error(f"Unknown lab '{args.lab}'. Available labs: {', '.join(labs)}")
+        return 1
 
     logger.info(f"Static trial: {args.trial}")
 
