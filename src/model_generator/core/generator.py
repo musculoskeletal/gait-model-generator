@@ -2,8 +2,10 @@
 import os
 
 from c3d_parser.core.utils import clear_directory
-from c3d_parser.core.c3d_parser import parse_static_trial, create_osim_model, validate_static_data
+from c3d_parser.core.c3d_parser import (parse_static_trial, create_osim_model, validate_static_data,
+                                        write_c3d_parser_history)
 
+from model_generator.settings.general import APPLICATION_NAME, VERSION
 from model_generator.settings.logging import logger
 
 
@@ -27,6 +29,9 @@ def generate_model(static_trial, input_directory, output_directory, lab, marker_
     model_path = create_osim_model(static_trc, "", static_frame, marker_diameter, static_data, output_directory,
                                    left_foot_flat, right_foot_flat, toe_marker_proximal=toe_marker_proximal,
                                    optimise_knee_axis=False, progress_tracker=progress_tracker)
+
+    write_c3d_parser_history(input_directory, output_directory, lab, static_trial, {}, static_data, left_foot_flat,
+                             right_foot_flat, toe_marker_proximal, app_name=APPLICATION_NAME, app_version=VERSION)
 
     logger.info(f"Generated model: {os.path.normpath(model_path)}.")
 
