@@ -32,6 +32,17 @@ approximation_keys = {
     'right_ankle_width': 'Right Ankle Width',
 }
 
+# Decimal places of the matching GUI fields.
+subject_decimals = {
+    'Height': 0,
+    'Weight': 2,
+    'ASIS Width': 1,
+    'Left Knee Width': 1,
+    'Right Knee Width': 1,
+    'Left Ankle Width': 1,
+    'Right Ankle Width': 1,
+}
+
 
 def run(args):
     app = QCoreApplication(sys.argv)
@@ -67,6 +78,11 @@ def run(args):
         for key, model_key in approximation_keys.items():
             if not static_data[model_key]:
                 static_data[model_key] = anthropometrics[key]
+
+    # Round subject values the same way the GUI fields do.
+    for model_key, decimals in subject_decimals.items():
+        if static_data[model_key] is not None:
+            static_data[model_key] = round(float(static_data[model_key]), decimals)
 
     static_trial_path = os.path.normpath(args.trial)
     try:
