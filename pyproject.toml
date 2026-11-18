@@ -25,7 +25,7 @@ version = {attr = "model_generator.__version__"}
 dependencies = {file = ["requirements.txt"]}
 
 [project.urls]
-Repository = "https://github.com/tsalemink/Model-Generator"
+Repository = "https://github.com/musculoskeletal/gait-model-generator"
 
 [project.scripts]
 model_generator_cli = "model_generator.application:main"

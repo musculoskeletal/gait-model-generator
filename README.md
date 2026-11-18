@@ -54,5 +54,5 @@ model_generator_cli headless --help
 
 If you would like to suggest a new feature for this application or report a bug you have discovered, please create a
 "New Issue" using the appropriate template found in this repository's 
-[_Issues_](https://github.com/tsalemink/Model-Generator/issues) page. Please check that your request does not match any 
+[_Issues_](https://github.com/musculoskeletal/gait-model-generator/issues) page. Please check that your request does not match any 
 existing issues.
