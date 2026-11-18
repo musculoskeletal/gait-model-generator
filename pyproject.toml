@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 package_dir = {'' = 'src'}
 
 [project]
-name = "model-generator"
+name = "gait-model-generator"
 description = "Personalised OpenSim model generator."
 authors = [{name = "Timothy Salemink", email = "tim.nicolas@outlook.com" }]
 readme = "README.md"
